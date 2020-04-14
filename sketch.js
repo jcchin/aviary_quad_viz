@@ -121,7 +121,7 @@ function draw() {
   beginShape();
   let i=0;
   for(let i=0; i < alt_history.length; i++){
-    let y = map(alt_history[i],0,600,600/6,0);
+    let y = map(alt_history[i],0,900,600/6,0);
     vertex(i+150,y-60,250);
   }
   endShape();
@@ -157,14 +157,16 @@ function draw() {
   text(round(pwr),75, 300, 200);
   stroke(0)
   fill(255,255,255,230);
-  arc(75, 350, 80, 80, PI*0.9, 2.1*PI, PIE); //speedometer
+  arc(75, 350, 80, 80, PI*0.79, 2.1*PI, PIE); //speedometer
   stroke(250);
+  fill(0,255,0,200);
+  arc(76, 348, 79, 79, PI*0.8, 1.0*PI, PIE); //green zone
   fill(255,255,0,200);
   arc(76, 349, 74, 74, PI*1.3, 2.1*PI, PIE); //yellow zone
   fill(255,0,0,200);
   arc(76, 349, 74, 74, PI*1.9, 2.1*PI, PIE); //red zone
   strokeWeight(4);
-  pwra = map(pwr, 0, 30000, 0, 1.2*PI) + PI*0.9;
+  pwra = map(pwr, -10000, 50000, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
   line(75, 350, 75 + cos(pwra) * 40, 350 + sin(pwra) * 40); // dial
   strokeWeight(1);
@@ -174,7 +176,7 @@ function draw() {
   translate(100,-100,0)
   //rotateZ(frameCount * 0.01);
   rotateY(0); //frameCount*0.0
-  rotateX(PI/2.5- radians(phi));  
+  rotateX(PI/2.5- radians(phi));
   //rotateY(frameCount * 0.01);
   translate(0,40,-20);
   cone(30, 40);
