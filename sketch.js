@@ -5,8 +5,8 @@ const key='pk.eyJ1IjoiamNjaGluIiwiYSI6ImNrOGo4Z3AwczA3ZGMzbHA1ZWZtd2wwcjIifQ.GS9
 // Options for map
 const options = {
   lat: 41.41,
-  lng: -81.85,
-  zoom: 12,
+  lng: -81.60,
+  zoom: 10,
   style: 'mapbox://styles/mapbox/satellite-v9',
   pitch: 0,
 };
@@ -45,7 +45,7 @@ function setup() {
 
 function draw() {
   background(230,230,230,180);
-  timeStep = floor(millis()/200) //step through rows every second
+  timeStep = floor(millis()/800) //step through rows every second
   //text(timeStep, 10, 10)
   let row = table.getRow(timeStep%table.getRowCount()) //read from CSV, modulus loop after complete
   // x1 = row.getString(0);
@@ -59,7 +59,7 @@ function draw() {
   SOC = row.getString(1);
   V = row.getString(2);
   I = row.getString(3);
-  velo = row.getString(4);
+  velo = abs(row.getString(4));
   lon = -81.85 + row.getString(5)/111;
   alt = (row.getString(6) - 1.524)*3280.84/3;
   pwr = row.getString(7);
@@ -121,7 +121,7 @@ function draw() {
   beginShape();
   let i=0;
   for(let i=0; i < alt_history.length; i++){
-    let y = map(alt_history[i],0,900,600/6,0);
+    let y = map(alt_history[i],0,1000,600/6,0);
     vertex(i+150,y-60,250);
   }
   endShape();
