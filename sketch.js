@@ -168,25 +168,11 @@ function draw() {
   // ---- quadrotor graphic --- //
   normalMaterial();
   push();
-  translate(100,-100,0)
+  translate(175,-100,0)
   rotateZ(radians(phi));
   rotateY(PI);
   rotateX(PI/2+PI/6); //frameCount*0.0
-  //rotateY(PI/2.5- radians(phi));
-  //rotateY(frameCount * 0.01);
   model(plane)
-  // translate(0,40,-20);
-  // cone(30, 40);
-  // translate(0,-40,0);
-  // cylinder(35, 35);
-  // translate(-30, -30, 30);
-  // torus(20,5);
-  // translate(60, 0, 0);
-  // torus(20,5);
-  // translate(0, 60, 0);
-  // torus(20,5);
-  // translate(-60, 0, 0);
-  // torus(20,5);
   pop();
   
 }
