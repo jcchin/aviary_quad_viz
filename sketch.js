@@ -5,8 +5,8 @@ const key='pk.eyJ1IjoiamNjaGluIiwiYSI6ImNrOGo4Z3AwczA3ZGMzbHA1ZWZtd2wwcjIifQ.GS9
 // Options for map
 const options = {
   lat: 41.41,
-  lng: -81.60,
-  zoom: 10,
+  lng: -81.50,
+  zoom: 9,
   style: 'mapbox://styles/mapbox/satellite-v9',
   pitch: 0,
 };
