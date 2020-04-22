@@ -45,7 +45,7 @@ function setup() {
 
 function draw() {
   background(230,230,230,180);
-  timeStep = floor(millis()/800) //step through rows every second
+  timeStep = floor(millis()/200) //step through rows every second
   //text(timeStep, 10, 10)
   let row = table.getRow(timeStep%table.getRowCount()) //read from CSV, modulus loop after complete
   SOC = row.getString(0);
