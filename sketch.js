@@ -21,6 +21,7 @@ function preload() {
   table = loadTable("output.csv", "csv", "header");
   myFont = loadFont('Inconsolata.otf');
   alt_history = [];
+  plane = loadModel('quadflapcolE_v5.obj', true);
 }
 
 function setup() {
@@ -168,22 +169,24 @@ function draw() {
   normalMaterial();
   push();
   translate(100,-100,0)
-  //rotateZ(frameCount * 0.01);
-  rotateY(0); //frameCount*0.0
-  rotateX(PI/2.5- radians(phi));
+  rotateZ(radians(phi));
+  rotateY(PI);
+  rotateX(PI/2+PI/6); //frameCount*0.0
+  //rotateY(PI/2.5- radians(phi));
   //rotateY(frameCount * 0.01);
-  translate(0,40,-20);
-  cone(30, 40);
-  translate(0,-40,0);
-  cylinder(35, 35);
-  translate(-30, -30, 30);
-  torus(20,5);
-  translate(60, 0, 0);
-  torus(20,5);
-  translate(0, 60, 0);
-  torus(20,5);
-  translate(-60, 0, 0);
-  torus(20,5);
+  model(plane)
+  // translate(0,40,-20);
+  // cone(30, 40);
+  // translate(0,-40,0);
+  // cylinder(35, 35);
+  // translate(-30, -30, 30);
+  // torus(20,5);
+  // translate(60, 0, 0);
+  // torus(20,5);
+  // translate(0, 60, 0);
+  // torus(20,5);
+  // translate(-60, 0, 0);
+  // torus(20,5);
   pop();
   
 }
