@@ -105,6 +105,7 @@ function draw() {
   translate(0,-400,0);
   
   // ----- alt graphic ---- //
+  rect(10,-200,780,600/4)
   strokeWeight(2);
   text("alt: ",75,10,200);
   text(round(alt),135,10,200);
