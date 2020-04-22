@@ -48,22 +48,15 @@ function draw() {
   timeStep = floor(millis()/800) //step through rows every second
   //text(timeStep, 10, 10)
   let row = table.getRow(timeStep%table.getRowCount()) //read from CSV, modulus loop after complete
-  // x1 = row.getString(0);
-  // SOC = row.getString(1);
-  // alt = row.getString(2);
-  // lat = row.getString(3);
-  // lon = row.getString(4);
-  // temp1 = row.getString(5);
-  // velo = row.getString(6);
-  t = row.getString(0);
-  SOC = row.getString(1);
-  V = row.getString(2);
-  I = row.getString(3);
-  velo = abs(row.getString(4));
-  lon = -81.85 + row.getString(5)/111;
-  alt = (row.getString(6) - 1.524)*3280.84/3;
-  pwr = row.getString(7);
-  phi = row.getString(8);
+  SOC = row.getString(0);
+  V = row.getString(1);
+  I = row.getString(2);
+  velo = abs(row.getString(3));
+  lon = -81.85 + row.getString(4)/111;
+  alt = (row.getString(5) - 1.524)*3280.84;
+  pwr = row.getString(6);
+  phi = row.getString(7);
+  t = row.getString(8);
   lat = 41.411;
   temp1 = 55;
   // ---- map point ----//
@@ -121,7 +114,7 @@ function draw() {
   beginShape();
   let i=0;
   for(let i=0; i < alt_history.length; i++){
-    let y = map(alt_history[i],0,1000,600/6,0);
+    let y = map(alt_history[i],0,6000,600/6,0);
     vertex(i+150,y-60,250);
   }
   endShape();
