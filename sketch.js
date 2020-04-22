@@ -142,7 +142,7 @@ function draw() {
   fill(255,0,0,200);
   arc(76, 249, 74, 74, PI*1.9, 2.1*PI, PIE); //red zone
   strokeWeight(4);
-  vel = map(velo, 0, 240, 0, 1.2*PI) + PI*0.9;
+  vel = map(velo, 0, 60, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
   line(75, 250, 75 + cos(vel) * 40, 250 + sin(vel) * 40); // dial
   strokeWeight(1);
@@ -161,7 +161,7 @@ function draw() {
   fill(255,0,0,200);
   arc(76, 349, 74, 74, PI*1.9, 2.1*PI, PIE); //red zone
   strokeWeight(4);
-  pwra = map(pwr, -10000, 50000, 0, 1.2*PI) + PI*0.9;
+  pwra = map(pwr, -1000, 20000, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
   line(75, 350, 75 + cos(pwra) * 40, 350 + sin(pwra) * 40); // dial
   strokeWeight(1);
@@ -172,7 +172,21 @@ function draw() {
   rotateZ(radians(phi));
   rotateY(PI);
   rotateX(PI/2+PI/6); //frameCount*0.0
+  //rotateY(PI/2.5- radians(phi));
+  //rotateY(frameCount * 0.01);
   model(plane)
+  // translate(0,40,-20);
+  // cone(30, 40);
+  // translate(0,-40,0);
+  // cylinder(35, 35);
+  // translate(-30, -30, 30);
+  // torus(20,5);
+  // translate(60, 0, 0);
+  // torus(20,5);
+  // translate(0, 60, 0);
+  // torus(20,5);
+  // translate(-60, 0, 0);
+  // torus(20,5);
   pop();
   
 }
