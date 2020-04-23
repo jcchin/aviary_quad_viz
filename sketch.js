@@ -57,12 +57,16 @@ function draw() {
   alt = (row.getString(5) - 1.524)*3280.84;
   pwr = row.getString(6);
   phi = row.getString(7);
-  t = row.getString(8);
+  rpmR = row.getString(8);
+  rpmF = row.getString(9);
+  t = row.getString(10);
   lat = 41.411;
   temp1 = 55;
   // ---- map point ----//
   // Transform lat/lng to pixel position
   const pos = myMap.latLngToPixel(lat, lon);
+  fill(255,0,0,255);
+  stroke(0);
   ellipse(pos.x-400, pos.y-400, 10, 10);
   
   // ---- battery graphic --- //
@@ -141,8 +145,10 @@ function draw() {
   }
   // ---- speedometer ----- //
   fill(0)
-  text("RPM: ",25, 100, 200);
-  text(round(velo),85, 100, 200);
+  text("RPM F/R: ",25, 80, 200);
+  text(round(rpmF),25, 100, 200);
+  text("/",75, 100, 200);
+  text(round(rpmR),85, 100, 200);
   stroke(0)
   strokeWeight(1);
   fill(255,255,255,230);
@@ -150,11 +156,12 @@ function draw() {
   stroke(250);
   fill(255,0,0,200);
   strokeWeight(4);
-  vel = map(velo, 0, 60, 0, 1.2*PI) + PI*0.9;
+  rpmRo = map(rpmR, 0, 3000, 0, 1.2*PI) + PI*0.9;
+  rpmFo = map(rpmF, 0, 3000, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
-  line(75, 150, 75 + cos(vel) * 40, 150 + sin(vel) * 40); // dial1
+  line(75, 150, 75 + cos(rpmRo) * 40, 150 + sin(rpmRo) * 40); // dial1
   stroke(250,0,0,250);
-  line(75, 150, 75 + cos(vel) * 40, 150 + sin(vel) * 40); // dial2
+  line(75, 150, 75 + cos(rpmFo) * 40, 150 + sin(rpmFo) * 40); // dial2
   strokeWeight(1);
   
   fill(0)
