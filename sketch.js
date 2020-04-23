@@ -55,7 +55,7 @@ function draw() {
   velo = abs(row.getString(3));
   lon = -81.85 + row.getString(4)/111;
   alt = (row.getString(5) - 1.524)*3280.84;
-  pwr = row.getString(6);
+  pwr = row.getString(6)*4;
   phi = row.getString(7);
   rpmR = row.getString(8);
   rpmF = row.getString(9);
@@ -70,7 +70,7 @@ function draw() {
   ellipse(pos.x-400, pos.y-400, 10, 10);
   
   // ---- battery graphic --- //
-  translate(-400,-200,0);
+  translate(-400,-220,0);
   fill(255,255,255,220);
   rect(10,-20,150,625); // white box
   push();
@@ -88,7 +88,8 @@ function draw() {
   fill(0);
   text("SOC: ",20,0,200);
   text(nf(SOC,1,3),75,0,200);
-  
+  text("Volts: ",20,50,200);
+  text(round(V),100,50,200);
   // ---- temp graphic --- //
   translate(0,400,0);
   fill(255,0,0,227); //red
@@ -184,7 +185,8 @@ function draw() {
   
   fill(0)
   text("Pwr: ",15, 300, 200);
-  text(round(pwr),75, 300, 200);
+  text(round(pwr/1000),75, 300, 200);
+  text('kW',105, 300, 200);
   stroke(0)
   fill(255,255,255,230);
   arc(75, 350, 80, 80, PI*0.79, 2.1*PI, PIE); //speedometer
@@ -196,7 +198,7 @@ function draw() {
   fill(255,0,0,200);
   arc(76, 349, 74, 74, PI*1.9, 2.1*PI, PIE); //red zone
   strokeWeight(4);
-  pwra = map(pwr, -1000, 20000, 0, 1.2*PI) + PI*0.9;
+  pwra = map(pwr, -1000, 20000*4, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
   line(75, 350, 75 + cos(pwra) * 40, 350 + sin(pwra) * 40); // dial
   strokeWeight(1);
