@@ -70,7 +70,7 @@ function draw() {
   ellipse(pos.x-400, pos.y-400, 10, 10);
   
   // ---- battery graphic --- //
-  translate(-400,-220,0);
+  translate(-400,-200,0);
   fill(255,255,255,220);
   rect(10,-20,150,625); // white box
   push();
