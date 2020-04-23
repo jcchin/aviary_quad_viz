@@ -27,7 +27,7 @@ function preload() {
 function setup() {
   
   canvas = createCanvas(800, 800, WEBGL); //activate WEBGL 800x800px
-  fill(204, 101, 192, 120); // fill color
+  fill(204, 101, 192, 220); // fill color
   stroke(127, 63, 120); // line stroke color
 
   //count the columns
@@ -45,7 +45,7 @@ function setup() {
 
 
 function draw() {
-  background(230,230,230,180);
+  background(230,230,230,10);
   timeStep = floor(millis()/200) //step through rows every second
   //text(timeStep, 10, 10)
   let row = table.getRow(timeStep%table.getRowCount()) //read from CSV, modulus loop after complete
@@ -67,49 +67,59 @@ function draw() {
   
   // ---- battery graphic --- //
   translate(-400,-200,0);
-  fill(map(SOC,0,1,200,150),250-map(SOC,0,1,250,0), 0,227); //green->yellow->red
-  stroke(127, 63, 120);
+  fill(255,255,255,220);
+  rect(10,-20,150,625); // white box
+  push();
+  rotateZ(PI/2);
+  translate(-30,-150,0);
+  fill(map(SOC,0,1,200,150),250-map(SOC,0,1,250,0), 0,237); //green->yellow->red
+  stroke(0);
   rect(40, 120, 20, -(90-map(SOC,0,1,90,0))); //x,y,w,h
   fill(4, 10, 4, 7); // transparent
-  stroke(127, 127, 120, 250);
+  stroke(0, 0, 0, 250);
   rect(40, 120, 20, -90); //battery outline
   rect(45, 25, 10, 5); //battery outline
   fill(0, 0, 0, 250); // transparent
-  text("SOC: ",75,50,200);
-  text(nf(SOC,1,3),135,50,200);
+  pop();
+  fill(0);
+  text("SOC: ",20,0,200);
+  text(nf(SOC,1,3),75,0,200);
   
   // ---- temp graphic --- //
   translate(0,400,0);
   fill(255,0,0,227); //red
   stroke(127, 63, 120);
-  rect(40, 120, 20, -(90-map(temp1,40,100,90,0))); //x,y,w,h T1
-  rect(80, 120, 20, -(90-map(temp1,40,100,90,0))*noise(temp1)); //T2
-  rect(120, 120, 20, -(90-map(temp1,40,100,90,0))*noise(velo)); //T3
+  rect(30, 120, 20, -(90-map(temp1,40,100,90,0))); //x,y,w,h T1
+  rect(70, 120, 20, -(90-map(temp1,40,100,90,0))*noise(temp1)); //T2
+  rect(110, 120, 20, -(90-map(temp1,40,100,90,0))*noise(velo)); //T3
   fill(4, 10, 4, 7); // transparent
   stroke(127, 127, 120, 250);
-  rect(40, 120, 20, -90); //thermometer outline
-  rect(80, 120, 20, -90); //thermometer outline 2
-  rect(120, 120, 20, -90); //thermometer outline 3
+  rect(30, 120, 20, -90); //thermometer outline
+  rect(70, 120, 20, -90); //thermometer outline 2
+  rect(110, 120, 20, -90); //thermometer outline 3
 
   fill(255,0,0,227); //bulb color
-  circle(50, 130, 30); //thermometer bulb
-  circle(90, 130, 30); //thermometer bulb 2
-  circle(130, 130, 30); //thermometer bulb 3
+  circle(40, 130, 30); //thermometer bulb
+  circle(80, 130, 30); //thermometer bulb 2
+  circle(120, 130, 30); //thermometer bulb 3
   fill(0, 0, 0, 250); // transparent
   textSize(22);
   text("Motr",15,0,200);
-  text(temp1,40,20,200);
-  text("Invr",70,0,200);
+  text(temp1,30,20,200);
+  text("Invr",60,0,200);
   text(floor(temp1*noise(temp1)),80,20,200);
-  text("Batt",120,0,200);
+  text("Batt",110,0,200);
   text(floor(temp1*noise(velo)),120,20,200);
   translate(0,-400,0);
   
   // ----- alt graphic ---- //
-  rect(10,-200,780,600/4)
-  strokeWeight(2);
-  text("alt: ",75,10,200);
-  text(round(alt),135,10,200);
+  rect(10,-200,780,600/4);  
+  strokeWeight(3);
+  fill(255);
+  textSize(26);
+  text("alt: ",15,-170,800);
+  fill(255);
+  text(round(alt),70,-170,200);
   alt_history.push(alt);
   stroke(100,100,250);
   noFill();
@@ -131,9 +141,27 @@ function draw() {
   }
   // ---- speedometer ----- //
   fill(0)
-  text("Vel: ",15, 200, 200);
-  text(round(velo),75, 200, 200);
+  text("RPM: ",25, 100, 200);
+  text(round(velo),85, 100, 200);
   stroke(0)
+  strokeWeight(1);
+  fill(255,255,255,230);
+  arc(75, 150, 80, 80, PI*0.9, 2.1*PI, PIE); //speedometer
+  stroke(250);
+  fill(255,0,0,200);
+  strokeWeight(4);
+  vel = map(velo, 0, 60, 0, 1.2*PI) + PI*0.9;
+  stroke(0,0,250,250);
+  line(75, 150, 75 + cos(vel) * 40, 150 + sin(vel) * 40); // dial1
+  stroke(250,0,0,250);
+  line(75, 150, 75 + cos(vel) * 40, 150 + sin(vel) * 40); // dial2
+  strokeWeight(1);
+  
+  fill(0)
+  text("Vel: ",25, 200, 200);
+  text(round(velo),85, 200, 200);
+  stroke(0)
+  strokeWeight(1);
   fill(255,255,255,230);
   arc(75, 250, 80, 80, PI*0.9, 2.1*PI, PIE); //speedometer
   stroke(250);
