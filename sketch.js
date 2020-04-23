@@ -76,7 +76,7 @@ function draw() {
   rect(45, 25, 10, 5); //battery outline
   fill(0, 0, 0, 250); // transparent
   text("SOC: ",75,50,200);
-  text(SOC,135,50,200);
+  text(nf(SOC,1,3),135,50,200);
   
   // ---- temp graphic --- //
   translate(0,400,0);
