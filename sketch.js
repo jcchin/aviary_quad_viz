@@ -46,7 +46,7 @@ function setup() {
 
 function draw() {
   background(230,230,230,10);
-  timeStep = floor(millis()/200) //step through rows every second
+  timeStep = floor(millis()/50) //step through rows every second
   //text(timeStep, 10, 10)
   let row = table.getRow(timeStep%table.getRowCount()) //read from CSV, modulus loop after complete
   SOC = row.getString(0);
@@ -55,11 +55,16 @@ function draw() {
   velo = abs(row.getString(3));
   lon = -81.85 + row.getString(4)/111;
   alt = (row.getString(5) - 1.524)*3280.84;
-  pwr = row.getString(6)*4;
+  pwr = row.getString(6)*2;
   phi = row.getString(7);
   rpmR = row.getString(8);
   rpmF = row.getString(9);
   t = row.getString(10);
+  T_batt = row.getString(11)-273.15;
+  T_cool = row.getString(12)-273.15;
+  T_mot = row.getString(13)-273.15;
+  TMS_pwr = row.getString(14);
+  pwr = pwr + float(TMS_pwr);
   lat = 41.411;
   temp1 = 55;
   // ---- map point ----//
@@ -70,7 +75,7 @@ function draw() {
   ellipse(pos.x-400, pos.y-400, 10, 10);
   
   // ---- battery graphic --- //
-  translate(-400,-200,0);
+  translate(-400,-220,0);
   fill(255,255,255,220);
   rect(10,-20,150,625); // white box
   push();
@@ -94,9 +99,9 @@ function draw() {
   translate(0,400,0);
   fill(255,0,0,227); //red
   stroke(127, 63, 120);
-  rect(30, 120, 20, -(90-map(temp1,40,100,90,0))); //x,y,w,h T1
-  rect(70, 120, 20, -(90-map(temp1,40,100,90,0))*noise(temp1)); //T2
-  rect(110, 120, 20, -(90-map(temp1,40,100,90,0))*noise(velo)); //T3
+  rect(30, 120, 20, -(90-map(T_mot,30,80,90,0))); //x,y,w,h T1
+  rect(70, 120, 20, -(90-map(T_batt,30,60,90,0))); //T2
+  rect(110, 120, 20, -(90-map(T_cool,26,34,90,0))); //T3
   fill(4, 10, 4, 7); // transparent
   stroke(127, 127, 120, 250);
   rect(30, 120, 20, -90); //thermometer outline
@@ -110,11 +115,11 @@ function draw() {
   fill(0, 0, 0, 250); // transparent
   textSize(22);
   text("Motr",15,0,200);
-  text(temp1,30,20,200);
-  text("Invr",60,0,200);
-  text(floor(temp1*noise(temp1)),80,20,200);
-  text("Batt",110,0,200);
-  text(floor(temp1*noise(velo)),120,20,200);
+  text(floor(T_mot),30,20,200);
+  text("Batt",60,0,200);
+  text(floor(T_batt),80,20,200);
+  text("Cool",110,0,200);
+  text(floor(T_cool),120,20,200);
   translate(0,-400,0);
   
   // ----- alt graphic ---- //
@@ -131,7 +136,7 @@ function draw() {
   beginShape();
   let i=0;
   for(let i=0; i < alt_history.length; i++){
-    let y = map(alt_history[i],0,6000,600/6,0);
+    let y = map(alt_history[i],0,4000,600/6,0);
     vertex(i+150,y-60,250);
   }
   endShape();
@@ -148,8 +153,8 @@ function draw() {
   fill(0)
   text("RPM F/R: ",25, 80, 200);
   text(round(rpmF),25, 100, 200);
-  text("/",75, 100, 200);
-  text(round(rpmR),85, 100, 200);
+  text("/",70, 100, 200);
+  text(round(rpmR),87, 100, 200);
   stroke(0)
   strokeWeight(1);
   fill(255,255,255,230);
@@ -157,8 +162,8 @@ function draw() {
   stroke(250);
   fill(255,0,0,200);
   strokeWeight(4);
-  rpmRo = map(rpmR, 0, 3000, 0, 1.2*PI) + PI*0.9;
-  rpmFo = map(rpmF, 0, 3000, 0, 1.2*PI) + PI*0.9;
+  rpmRo = map(rpmR, 620, 720, 0, 1.2*PI) + PI*0.9;
+  rpmFo = map(rpmF, 620, 720, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
   line(75, 150, 75 + cos(rpmRo) * 40, 150 + sin(rpmRo) * 40); // dial1
   stroke(250,0,0,250);
@@ -185,7 +190,7 @@ function draw() {
   
   fill(0)
   text("Pwr: ",15, 300, 200);
-  text(round(pwr/1000),75, 300, 200);
+  text(round(pwr),75, 300, 200);
   text('kW',105, 300, 200);
   stroke(0)
   fill(255,255,255,230);
@@ -198,7 +203,7 @@ function draw() {
   fill(255,0,0,200);
   arc(76, 349, 74, 74, PI*1.9, 2.1*PI, PIE); //red zone
   strokeWeight(4);
-  pwra = map(pwr, -1000, 20000*4, 0, 1.2*PI) + PI*0.9;
+  pwra = map(pwr, 22, 35, 0, 1.2*PI) + PI*0.9;
   stroke(0,0,250,250);
   line(75, 350, 75 + cos(pwra) * 40, 350 + sin(pwra) * 40); // dial
   strokeWeight(1);
