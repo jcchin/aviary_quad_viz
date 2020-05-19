@@ -101,7 +101,7 @@ function draw() {
   stroke(127, 63, 120);
   rect(30, 120, 20, -(90-map(T_mot,30,80,90,0))); //x,y,w,h T1
   rect(70, 120, 20, -(90-map(T_batt,30,60,90,0))); //T2
-  rect(110, 120, 20, -(90-map(T_cool,26,34,90,0))); //T3
+  rect(110, 120, 20, -(90-map(T_cool,30,60,90,0))); //T3
   fill(4, 10, 4, 7); // transparent
   stroke(127, 127, 120, 250);
   rect(30, 120, 20, -90); //thermometer outline
@@ -136,7 +136,7 @@ function draw() {
   beginShape();
   let i=0;
   for(let i=0; i < alt_history.length; i++){
-    let y = map(alt_history[i],0,4000,600/6,0);
+    let y = map(alt_history[i],0,2000,600/6,0);
     vertex(i+150,y-60,250);
   }
   endShape();
