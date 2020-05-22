@@ -21,6 +21,9 @@ function preload() {
   table = loadTable("output.csv", "csv", "header");
   myFont = loadFont('Inconsolata.otf');
   alt_history = [];
+  trail = [];
+  trail.push(new Particle(0,0))
+
   plane = loadModel('quadflapcolE_v5.obj', true);
 }
 
@@ -72,7 +75,16 @@ function draw() {
   const pos = myMap.latLngToPixel(lat, lon);
   fill(255,0,0,255);
   stroke(0);
-  ellipse(pos.x-400, pos.y-400, 10, 10);
+  for (var n = 0; n < trail.length; n++) {
+    trail[n].update(pos.x-400, pos.y-400, alt);
+    trail[n].show();
+    if (alt == 0){
+      trail[n].clear();
+    }
+  }
+  fill(255,0,0,255);
+  ellipse(pos.x-400, pos.y-400,9,9);
+
   
   // ---- battery graphic --- //
   translate(-400,-200,0);
