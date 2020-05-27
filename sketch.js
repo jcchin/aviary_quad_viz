@@ -139,9 +139,9 @@ function draw() {
   strokeWeight(3);
   fill(255);
   textSize(26);
-  text("alt: ",15,-170,800);
+  text("alt(m): ",15,-170,800);
   fill(255);
-  text(round(alt),70,-170,200);
+  text(round(alt/3.28084),105,-170,200);
   alt_history.push(alt);
   stroke(100,100,250);
   noFill();
