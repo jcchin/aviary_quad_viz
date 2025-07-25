@@ -7,12 +7,12 @@ const options = {
   lat: 41.41,
   lng: -81.50,
   zoom: 9,
-  style: 'mapbox://styles/mapbox/satellite-v9',
+  style: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
   pitch: 0,
 };
 
 // Create an instance of MapboxGL
-//const mappa = new Mappa('MapboxGL', key);
+const mappa = new Mappa('Leaflet', key);
 let myMap;
 var table;
 
@@ -43,7 +43,7 @@ function setup() {
   
   // Create a tile map and overlay the canvas on top.
   myMap = mappa.tileMap(options);
-  // myMap.overlay(canvas);
+  myMap.overlay(canvas);
 }
 
 
