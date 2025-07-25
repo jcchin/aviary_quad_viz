@@ -42,7 +42,7 @@ function setup() {
   textSize(30);
   
   // Create a tile map and overlay the canvas on top.
-  // myMap = mappa.tileMap(options);
+  myMap = mappa.tileMap(options);
   // myMap.overlay(canvas);
 }
 
