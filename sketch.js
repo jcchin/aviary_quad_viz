@@ -1,6 +1,6 @@
 // API Key for MapboxGL. Get one here:
 // https://www.mapbox.com/studio/account/tokens/
-const key='pk.eyJ1IjoiamNjaGluIiwiYSI6ImNrOGo4Z3AwczA3ZGMzbHA1ZWZtd2wwcjIifQ.GS957vuiuTQvsmLSlQ-4UA';
+// const key='pk.eyJ1IjoiamNjaGluIiwiYSI6ImNrOGo4Z3AwczA3ZGMzbHA1ZWZtd2wwcjIifQ.GS957vuiuTQvsmLSlQ-4UA';
 
 // Options for map
 const options = {
