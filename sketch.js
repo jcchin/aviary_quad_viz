@@ -12,7 +12,7 @@ const options = {
 };
 
 // Create an instance of MapboxGL
-const mappa = new Mappa('Leaflet', key);
+const mappa = new Mappa('Leaflet');
 let myMap;
 var table;
 
